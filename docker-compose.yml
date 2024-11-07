@@ -1,0 +1,11 @@
+services:
+  dbt:
+    build:
+      context: .
+    env_file: .env
+    image: my_dbt:latest
+
+networks:
+  default:
+    external: true
+    name: airflow_default

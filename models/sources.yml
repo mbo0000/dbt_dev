@@ -1,0 +1,22 @@
+version: 2
+
+sources:
+  - name: raw   
+    database: CLEAN 
+    schema: RAW 
+
+    tables:
+      - name: games   
+        description: "Raw data for NBA games."
+
+      - name: teams   
+        description: "nba team detail"
+
+      - name: team_stat   
+        description: "nba team cum stat stat per season"
+      
+      - name: team_roster
+        description: "Team roster by season"
+
+      - name: player_game_stat
+        description: "Player statistics per game played"
