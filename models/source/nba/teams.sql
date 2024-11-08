@@ -2,4 +2,4 @@
     materialized="view"
 ) }}
 
-select * from {{source('raw', 'teams')}}
+select * from {{source('raw', 'teams')}} limit 10;
