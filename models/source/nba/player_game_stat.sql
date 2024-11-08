@@ -2,4 +2,4 @@
     materialized="view"
 ) }}
 
-select * from {{source('raw', 'player_game_stat')}} limit 10
+select * from {{source('raw', 'player_game_stat')}}
