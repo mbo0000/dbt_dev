@@ -11,7 +11,7 @@ my_dbt:
       password: "{{ env_var('SNOWF_PASSWORD') }}"
       role: "{{ env_var('SNOWF_ROLE') }}"
       database: "{{ env_var('SNOWF_DATABASE') }}"
-      warehouse: production_wh
+      warehouse: "{{ env_var('SNOWF_PROD_WH') }}"
       schema: "{{ env_var('SNOWF_SCHEMA') }}"
       threads: 1
       client_session_keep_alive: False
@@ -23,7 +23,7 @@ my_dbt:
       password: "{{ env_var('SNOWF_PASSWORD') }}"
       role: "{{ env_var('SNOWF_ROLE') }}"
       database: "{{ env_var('SNOWF_DATABASE') }}"
-      warehouse: staging_wh
+      warehouse: "{{ env_var('SNOWF_STAGING_WH') }}"
       schema: "{{ env_var('SNOWF_SCHEMA') }}"
       threads: 1
       client_session_keep_alive: False
