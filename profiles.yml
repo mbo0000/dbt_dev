@@ -1,4 +1,4 @@
-my_dbt:
+dbt_dev:
   
   # Default target, can switch this in the command line via locally or dbt cloud: dbt run --target staging_wh
   target: prod_wh

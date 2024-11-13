@@ -27,6 +27,7 @@ select
     , n.PTS
     , n.REB
     , n.SEASON_ID
+    , try_to_number(right(n.season_id, 4))      as year
     , n.SEASON_TYPE
     , n.STL
     , n.TEAM_ABBREVIATION
