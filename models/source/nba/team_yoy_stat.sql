@@ -24,7 +24,9 @@ select
     , n.FTM
     , ROUND(DIV0(n.FTM,n.FTA::DECIMAL), 4)    AS FT_PCT
     , n.ID
-    , case when n.NBA_FINALS_APPEARANCE = 'N/A' then null else n.NBA_FINALS_APPEARANCE end as NBA_FINALS_APPEARANCE
+    , case when n.NBA_FINALS_APPEARANCE = 'N/A' 
+        then null else n.NBA_FINALS_APPEARANCE 
+        end                                   as NBA_FINALS_APPEARANCE
     , n.OREB
     , n.PF
     , n.PO_LOSSES
@@ -39,8 +41,9 @@ select
     , n.TEAM_ID
     , n.TEAM_NAME
     , n.TOV
-    , n.YEAR
-    , CURRENT_TIMESTAMP() AS SYNC_TIME
+    , n.YEAR                                 as SEASON_ID
+    , try_to_number(left(n.year, 4))         as year                                     
+    , CURRENT_TIMESTAMP()                    AS SYNC_TIME
 from {{source('raw', 'team_stat')}} as n
 
 -- append to table when there are new records(id is null) OR updating existing record if value(GP column) changed
