@@ -1,6 +1,7 @@
 {{ config(
     materialized="incremental"
-    ,incremental_strategy="merge"
+    , incremental_strategy="merge"
+    , unique_key = 'id'
 ) }}
 
 with stat_agg as (
@@ -12,7 +13,7 @@ with stat_agg as (
         , t.ABBREVIATION as team
         , count(distinct ps.game_id) as game_played 
         , sum(ps.min) as total_min_played
-        , avg(ps.min) as avg_min_played
+        , round(avg(ps.min),1) as avg_min_played
         , round(avg(PTS),1) as point_pg
         , round(avg(REB),1) as rebound_pg
         , round(avg(AST),1) as assist_pg
@@ -30,7 +31,7 @@ with stat_agg as (
 )
 
 select
-    *
+    n.*
     , CURRENT_TIMESTAMP() AS SYNC_TIME
 from stat_agg as n
 
