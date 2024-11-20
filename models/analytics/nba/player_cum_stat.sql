@@ -5,7 +5,7 @@
 
 with stat_agg as (
     select
-        concat(player_id, year) as id
+        concat(ps.player_id, year) as id
         , ts.player
         , year
         , t.full_name as team_name
