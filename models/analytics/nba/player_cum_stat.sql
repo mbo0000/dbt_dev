@@ -26,7 +26,7 @@ with stat_agg as (
         join {{ref('team_roster')}} as ts 
             on ps.player_id = ts.player_id and ps.year = ts.season
         join {{ref('teams')}} as t on ts.TEAMID = t.id
-    group by 1,2,3,4
+    group by 1,2,3,4,5
 )
 
 select
