@@ -13,7 +13,7 @@ with games_data AS (
         ROW_NUMBER() OVER (PARTITION BY team_id ORDER BY game_date) AS rn
     FROM
         {{ref('games')}}
-),
+)
 
 
 -- last 10 game win lost count
