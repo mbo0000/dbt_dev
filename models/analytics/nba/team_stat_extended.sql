@@ -8,6 +8,7 @@ with games_data AS (
         team_id,
         team_name,
         game_date,
+        game_id,
         WL,
         year,
         ROW_NUMBER() OVER (PARTITION BY team_id ORDER BY game_date) AS rn
@@ -36,7 +37,7 @@ with games_data AS (
 )
 
 -- Create groups based on WL changes: Use a difference of row numbers technique to identify consecutive W or L streaks.
-wl_streak_groups AS (
+, wl_streak_groups AS (
     SELECT
         team_id,
         game_date,
