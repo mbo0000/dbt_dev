@@ -68,7 +68,7 @@ streaks AS (
         streak_length AS current_streak_length
     FROM
         streaks
-    QUALIFY ROW_NUMBER() OVER (PARTITION BY team_id ORDER BY last_game_date DESC) = 1
+    QUALIFY ROW_NUMBER() OVER (PARTITION BY team_id, year ORDER BY last_game_date DESC) = 1
     ORDER BY
         team_id
 )
