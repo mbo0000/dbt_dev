@@ -2,8 +2,28 @@
     materialized="view"
 ) }}
 
+<<<<<<< HEAD
 -- last 10 game win lost count
 with l_10_games as (
+=======
+-- Sort the games by date to ensure proper sequencing for rn
+with games_data AS (
+    SELECT
+        team_id,
+        team_name,
+        game_date,
+        game_id,
+        WL,
+        year,
+        ROW_NUMBER() OVER (PARTITION BY team_id ORDER BY game_date) AS rn
+    FROM
+        {{ref('games')}}
+)
+
+
+-- last 10 game win lost count
+, l_10_games as (
+>>>>>>> main
     select 
         team_id, team_name, year
         , concat(
@@ -15,12 +35,17 @@ with l_10_games as (
         select
             team_id, game_id, wl, year, team_name
         from
+<<<<<<< HEAD
             {{ref('games')}}
+=======
+            games_data
+>>>>>>> main
         qualify row_number() over(partition by team_id, year order by game_date desc) <= 10
     ) as sq
     group by team_id, team_name, year
 )
 
+<<<<<<< HEAD
 , -- Sort the games by date to ensure proper sequencing for rn
 games_data AS (
     SELECT
@@ -35,6 +60,10 @@ games_data AS (
 
 -- Create groups based on WL changes: Use a difference of row numbers technique to identify consecutive W or L streaks.
 wl_streak_groups AS (
+=======
+-- Create groups based on WL changes: Use a difference of row numbers technique to identify consecutive W or L streaks.
+, wl_streak_groups AS (
+>>>>>>> main
     SELECT
         team_id,
         game_date,
@@ -68,7 +97,11 @@ streaks AS (
         streak_length AS current_streak_length
     FROM
         streaks
+<<<<<<< HEAD
     QUALIFY ROW_NUMBER() OVER (PARTITION BY team_id ORDER BY last_game_date DESC) = 1
+=======
+    QUALIFY ROW_NUMBER() OVER (PARTITION BY team_id, year ORDER BY last_game_date DESC) = 1
+>>>>>>> main
     ORDER BY
         team_id
 )
