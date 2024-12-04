@@ -11,9 +11,26 @@ with games_data AS (
         game_id,
         WL,
         year,
+        REB,
+        STL,
+        AST,
+        BLK,
         ROW_NUMBER() OVER (PARTITION BY team_id ORDER BY game_date) AS rn
     FROM
         {{ref('games')}}
+)
+
+-- avg per game
+, avg_pg as (
+    select
+        team_id
+        , year
+        , avg(REB) as reb_pg
+        , avg(STL) as stl_pg
+        , avg(AST) as ast_pg
+        , avg(BLK) as blk_pg
+    from games_data
+    group by 1,2
 )
 
 
@@ -81,5 +98,10 @@ select
     , cs.year
     , concat(cs.current_streak_type, cs.current_streak_length) as current_streak
     , lg.l10g as last_10_games
+    , reb_pg
+    , stl_pg
+    , ast_pg
+    , blk_pg
 from current_streak as cs
     left join l_10_games as lg on cs.team_id = lg.team_id and cs.year = lg.year
+    left join avg_pg as apg on cs.team_id = apg.team_id and cs.year = apg.year
