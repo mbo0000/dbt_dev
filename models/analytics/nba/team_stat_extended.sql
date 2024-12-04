@@ -34,6 +34,19 @@ with games_data AS (
 )
 
 
+, off_def_rating as (
+    select 
+        s.team_id
+        , gd.year
+        , round(avg(s.OFFENSIVE_RATING), 1) as off_rating
+        , round(avg(s.DEFENSIVE_RATING),1) as def_rating
+    from {{ref('team_boxscore_adv_stat')}} as s
+        join games_data gd on s.team_id = gd.team_id and s.game_id = gd.game_id
+    where
+        gd.year >= 2023
+    group by 1,2
+)
+
 -- last 10 game win lost count
 , l_10_games as (
     select 
@@ -102,6 +115,9 @@ select
     , stl_pg
     , ast_pg
     , blk_pg
+    , odr.off_rating
+    , odr.def_rating
 from current_streak as cs
     left join l_10_games as lg on cs.team_id = lg.team_id and cs.year = lg.year
     left join avg_pg as apg on cs.team_id = apg.team_id and cs.year = apg.year
+    left join off_def_rating as odr on cs.team_id = odr.team_id and cs.year = odr.year
