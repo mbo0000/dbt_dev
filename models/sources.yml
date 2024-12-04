@@ -20,3 +20,6 @@ sources:
 
       - name: player_game_stat
         description: "Player statistics per game played"
+      
+      - name: team_boxscore
+        description: "team advanced stats"
