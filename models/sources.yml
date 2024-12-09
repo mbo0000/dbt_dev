@@ -2,8 +2,8 @@ version: 2
 
 sources:
   - name: raw   
-    database: CLEAN 
-    schema: RAW 
+    database: RAW 
+    schema: PC_DUMP
 
     tables:
       - name: games   
