@@ -44,6 +44,3 @@ models:
 
       nba:
         +schema: nba
-
-      raw:
-        +schema: raw
