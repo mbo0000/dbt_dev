@@ -58,7 +58,7 @@ Welcome to the NBA dbt repository. This project will cover the T part in the ELT
     - Create a CI job that will be trigger on pull request 
 
 ## Usage
-dbt Cloud will run daily on the scheduled time setup in step 4. To run project locally, run:
+dbt Cloud will run daily on the scheduled time config in step 4. To run project locally, run:
 ```
 dbt run -s model_name --target transforming
 ```
