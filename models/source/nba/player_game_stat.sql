@@ -8,13 +8,13 @@ select
     ,DREB
     ,FG3A
     ,FG3M
-    ,div0(FG3M/FG3A) as FG3_PCT
+    ,div0(FG3M,FG3A) as FG3_PCT
     ,FGA
     ,FGM
-    ,div0(FGM/FGA) as FG_PCT
+    ,div0(FGM,FGA) as FG_PCT
     ,FTA
     ,FTM
-    ,div0(FTM/FTA) as FT_PCT
+    ,div0(FTM,FTA) as FT_PCT
     ,GAME_DATE
     ,GAME_ID
     ,ID
