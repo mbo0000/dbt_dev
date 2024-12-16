@@ -15,7 +15,7 @@ select
     ,FTA
     ,FTM
     ,div0(FTM,FTA) as FT_PCT
-    ,GAME_DATE
+    ,g.GAME_DATE
     ,GAME_ID
     ,ID
     ,MATCHUP
@@ -32,4 +32,5 @@ select
     ,VIDEO_AVAILABLE
     ,WL
     , try_to_number(right(SEASON_ID, 4)) as year
-from {{source('raw', 'player_game_stat')}}
+from {{source('raw', 'player_game_stat')}} as p
+    left join {{ref('games')}} as g on p.game_id = p.game_id
