@@ -33,4 +33,4 @@ select
     ,p.WL
     , try_to_number(right(p.SEASON_ID, 4)) as year
 from {{source('raw', 'player_game_stat')}} as p
-    left join {{ref('games')}} as g on p.game_id = p.game_id
+    left join {{ref('games')}} as g on p.game_id = g.game_id
