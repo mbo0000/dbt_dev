@@ -8,9 +8,8 @@ Welcome to the NBA dbt repository. This project will cover the T part in the ELT
 
 ## Project Overview
 
-[Diagram](insert url)
 1. **Transform Raw Data**: transforming raw data into clean. 
-    - Review Snowflake setup and configuration [here](insert url)
+    - Review Snowflake setup and configuration [here](https://github.com/mbo0000/nba_e2e_data_pipeline?tab=readme-ov-file#1-snowflake-management-and-config)
     - Perform data tranformation, processing and moving transformed data from raw into source. 
 2. **Structured Database Management**: new data models for analysis, custom macros and data warehouse management.
 
@@ -33,6 +32,9 @@ Welcome to the NBA dbt repository. This project will cover the T part in the ELT
     cd dbt_dev
     ```
     Install 'dbt-core' and 'dbt-snowflake' packages from `requirements.txt` file if they are not yet installed. 
+    ```
+    pip install -r requirements.txt
+    ```
 
 2. update `profiles.yml`
     ```
@@ -48,7 +50,7 @@ Welcome to the NBA dbt repository. This project will cover the T part in the ELT
         threads: 1
         client_session_keep_alive: False
     ```
-    Replace "foo"s with your account creds. Use target *transforming* for when running locally.
+    Replace "foo"s with your account creds. Use target *transforming* for when running project locally.
 
 3. Create a Github repo for this project
 4. Setup [dbt Cloud](https://docs.getdbt.com/docs/cloud/git/connect-github):
@@ -58,7 +60,9 @@ Welcome to the NBA dbt repository. This project will cover the T part in the ELT
     - Create a CI job that will be trigger on pull request 
 
 ## Usage
-dbt Cloud will run daily on the scheduled time config in step 4. To run project locally, run:
+dbt Cloud will run daily on the scheduled time config in step 4. 
+
+To execute a model locally, run:
 ```
 dbt run -s model_name --target transforming
 ```
